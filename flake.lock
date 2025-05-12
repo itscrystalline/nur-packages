@@ -56,15 +56,16 @@
         "nixpkgs": "nixpkgs_2"
       },
       "locked": {
-        "lastModified": 1746439527,
-        "narHash": "sha256-pNifigOVE562UA2+IgyV7t6KZkVEFrgNyCuQhAkfPdY=",
+        "lastModified": 1746354499,
+        "narHash": "sha256-A7/tsAiGlXxvcCc+MxKs/QH4YZ2vERJpccKNabpGP/U=",
         "owner": "itscrystalline",
         "repo": "occasion",
-        "rev": "5d29500b561fcc28a1392f098d4df4b94036f7da",
+        "rev": "06f3f5992e6cb86153ac5bc4713b9e0ecacf47d1",
         "type": "github"
       },
       "original": {
         "owner": "itscrystalline",
+        "ref": "v0.3.0",
         "repo": "occasion",
         "type": "github"
       }

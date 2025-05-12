@@ -2,7 +2,7 @@
   description = "My personal NUR repository";
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixpkgs-unstable";
-    occasion.url = "github:itscrystalline/occasion";
+    occasion.url = "github:itscrystalline/occasion/v0.3.0";
   };
   outputs = {
     self,

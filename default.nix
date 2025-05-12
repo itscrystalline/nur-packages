@@ -7,7 +7,7 @@
 #     nix-build -A mypackage
 {
   pkgs ? import <nixpkgs> {},
-  occasion,
+  occasion ? (builtins.getFlake "github:itscrystalline/occasion/v0.3.0"),
 }: {
   # The `lib`, `modules`, and `overlays` names are special
   lib = import ./lib {inherit pkgs;}; # functions
