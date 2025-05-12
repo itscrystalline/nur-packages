@@ -15,7 +15,7 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
   };
 
   cargoLock = {
-    lockFile = src + "/Cargo.lock";
+    lockFile = "${src}/Cargo.lock";
   };
 
   meta = {
