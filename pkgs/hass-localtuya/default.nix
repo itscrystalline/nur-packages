@@ -15,6 +15,10 @@ buildHomeAssistantComponent rec {
     hash = "sha256-cYaMHh16dmjO8UrpBZScGoHDNqvmQ5ceAq/lP6qazxA=";
   };
 
+  passthru = {
+    isHomeAssistantComponent = true;
+  };
+
   meta = with lib; {
     changelog = "https://github.com/xZetsubou/hass-localtuya/releases/tag/${version}";
     description = "Home Assistant custom Integration for local handling of Tuya-based devices";

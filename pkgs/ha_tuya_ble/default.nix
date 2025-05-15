@@ -22,7 +22,9 @@ in
       tuya-iot-py-sdk
       pycountry
     ];
-
+    passthru = {
+      isHomeAssistantComponent = true;
+    };
     meta = with lib; {
       changelog = "https://github.com/jbsky/ha_tuya_ble/releases/tag/${version}";
       description = "Home Assistant support for Tuya BLE devices ";
