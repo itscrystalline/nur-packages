@@ -5,12 +5,12 @@
 }:
 buildHomeAssistantComponent rec {
   owner = "xZetsubou";
-  domain = "hass-localtuya";
+  domain = "localtuya";
   version = "2025.5.1";
 
   src = fetchFromGitHub {
     inherit owner;
-    repo = domain;
+    repo = "hass-localtuya";
     rev = version;
     hash = "sha256-cYaMHh16dmjO8UrpBZScGoHDNqvmQ5ceAq/lP6qazxA=";
   };
@@ -19,7 +19,7 @@ buildHomeAssistantComponent rec {
     changelog = "https://github.com/xZetsubou/hass-localtuya/releases/tag/${version}";
     description = "Home Assistant custom Integration for local handling of Tuya-based devices";
     homepage = "https://github.com/xZetsubou/hass-localtuya";
-    maintainers = with maintainers; [rhoriguchi];
+    maintainers = [];
     license = licenses.gpl3Only;
   };
 }
