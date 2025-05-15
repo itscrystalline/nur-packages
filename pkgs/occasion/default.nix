@@ -3,7 +3,7 @@
   fetchFromGitHub,
   rustPlatform,
 }:
-rustPlatform.buildRustPackage (finalAttrs: rec {
+rustPlatform.buildRustPackage rec {
   pname = "occasion";
   version = "0.3.0";
 
@@ -24,4 +24,4 @@ rustPlatform.buildRustPackage (finalAttrs: rec {
     license = lib.licenses.unlicense;
     maintainers = [];
   };
-})
+}
