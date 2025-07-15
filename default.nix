@@ -13,6 +13,7 @@
 
   app2nix = pkgs.callPackage ./pkgs/app2unit {};
   occasion = pkgs.callPackage ./pkgs/occasion {};
+  veridian = pkgs.callPackage ./pkgs/veridian {};
   sipa-th-fonts = pkgs.callPackage ./pkgs/sipa-th-fonts {};
   hass-localtuya = pkgs.callPackage ./pkgs/hass-localtuya {};
   ha_tuya_ble = pkgs.callPackage ./pkgs/ha_tuya_ble {};
