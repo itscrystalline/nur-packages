@@ -2,10 +2,12 @@
   lib,
   fetchFromGitHub,
   rustPlatform,
+  verilator,
+  verible,
 }:
-rustPlatform.buildRustPackage rec {
+rustPlatform.buildRustPackage (finalAttrs: {
   pname = "veridian";
-  version = "d094c9d";
+  version = "0.1.0";
 
   src = fetchFromGitHub {
     owner = "vivekmalneedi";
@@ -15,8 +17,10 @@ rustPlatform.buildRustPackage rec {
   };
 
   cargoLock = {
-    lockFile = "${src}/Cargo.lock";
+    lockFile = "${finalAttrs.src}/Cargo.lock";
   };
+
+  nativeCheckInputs = [verible verilator];
 
   meta = {
     description = "A SystemVerilog Language Server ";
@@ -24,4 +28,4 @@ rustPlatform.buildRustPackage rec {
     license = lib.licenses.mit;
     maintainers = [];
   };
-}
+})
