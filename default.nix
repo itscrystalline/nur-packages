@@ -18,4 +18,5 @@
   hass-localtuya = pkgs.callPackage ./pkgs/hass-localtuya {};
   ha_tuya_ble = pkgs.callPackage ./pkgs/ha_tuya_ble {};
   jitterbugpair = pkgs.callPackage ./pkgs/jitterbugpair {};
+  vicinae = pkgs.callPackage ./pkgs/vicinae {};
 }
