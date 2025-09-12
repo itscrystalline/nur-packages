@@ -19,4 +19,5 @@
   ha_tuya_ble = pkgs.callPackage ./pkgs/ha_tuya_ble {};
   jitterbugpair = pkgs.callPackage ./pkgs/jitterbugpair {};
   vicinae = pkgs.callPackage ./pkgs/vicinae {};
+  irony-mod-manager = pkgs.callPackage ./pkgs/irony-mod-manager {};
 }
