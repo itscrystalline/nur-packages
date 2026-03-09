@@ -10,7 +10,12 @@ in {
   options.services.ocid = {
     enable = lib.mkEnableOption "Oracle Cloud Infrastructure utilities daemon (ocid)";
 
-    package = lib.mkPackageOption pkgs "oci-utils" {};
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.callPackage ../pkgs/oci-utils {};
+      defaultText = lib.literalExpression "pkgs.callPackage ../pkgs/oci-utils {}";
+      description = "The oci-utils package to use.";
+    };
   };
 
   config = lib.mkIf cfg.enable {

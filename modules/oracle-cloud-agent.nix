@@ -20,7 +20,12 @@ in {
   options.services.oracle-cloud-agent = {
     enable = lib.mkEnableOption "Oracle Cloud Infrastructure agent";
 
-    package = lib.mkPackageOption pkgs "oracle-cloud-agent" {};
+    package = lib.mkOption {
+      type = lib.types.package;
+      default = pkgs.callPackage ../pkgs/oracle-cloud-agent {};
+      defaultText = lib.literalExpression "pkgs.callPackage ../pkgs/oracle-cloud-agent {}";
+      description = "The oracle-cloud-agent package to use.";
+    };
   };
 
   config = lib.mkIf cfg.enable {
