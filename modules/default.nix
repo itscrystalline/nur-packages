@@ -1,5 +1,4 @@
 {
-  # Add your NixOS modules here
-  #
-  # my-module = ./my-module;
+  oracle-cloud-agent = ./oracle-cloud-agent.nix;
+  ocid = ./ocid.nix;
 }

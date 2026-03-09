@@ -20,4 +20,7 @@
   jitterbugpair = pkgs.callPackage ./pkgs/jitterbugpair {};
   vicinae = pkgs.callPackage ./pkgs/vicinae {};
   irony-mod-manager = pkgs.callPackage ./pkgs/irony-mod-manager {};
+  oracle-cloud-agent = pkgs.callPackage ./pkgs/oracle-cloud-agent {};
+  oci-utils = pkgs.callPackage ./pkgs/oci-utils {};
+  oci-image-migrate = pkgs.callPackage ./pkgs/oci-image-migrate {};
 }
