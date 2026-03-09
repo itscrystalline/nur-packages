@@ -23,6 +23,7 @@ python3.pkgs.buildPythonApplication rec {
     requests
     sdnotify
     python-daemon
+    netaddr
   ];
 
   # The setup.py tries to install into absolute system paths (/etc, /usr/lib/systemd, etc.)
@@ -45,9 +46,17 @@ python3.pkgs.buildPythonApplication rec {
           $out/bin/oci-image-migrate-import \
           $out/bin/oci-image-migrate-upload
 
+    # Build a PYTHONPATH covering this package and all propagated deps.
+    # makeWrapper --add-flags bypasses the normal generated wrapper that sets
+    # PYTHONPATH, so we must supply it explicitly for every Python wrapper we
+    # create. Without this, propagated deps (daemon, oci, requests, sdnotify)
+    # are invisible at runtime.
+    pythonPath="${python3.pkgs.makePythonPath propagatedBuildInputs}:$out/${python3.sitePackages}"
+
+    sitePackages=$out/${python3.sitePackages}
+
     # The upstream bin/ scripts are sh wrappers that discover the oci_utils.impl path
     # at runtime via python. Replace them with proper wrappers pointing to the Nix store.
-    sitePackages=$out/${python3.sitePackages}
     for script in $out/bin/oci-*; do
       name=$(basename "$script")
       # derive the main python module name: oci-public-ip -> oci-public-ip-main.py
@@ -55,14 +64,16 @@ python3.pkgs.buildPythonApplication rec {
       if [ -f "$mainpy" ]; then
         rm "$script"
         makeWrapper ${python3.interpreter} "$script" \
-          --add-flags "$mainpy"
+          --add-flags "$mainpy" \
+          --set PYTHONPATH "$pythonPath"
       fi
     done
 
     # oci-kvm: its main module lives under impl/virt/, not impl/
     rm -f $out/bin/oci-kvm
     makeWrapper ${python3.interpreter} $out/bin/oci-kvm \
-      --add-flags "$sitePackages/oci_utils/impl/virt/oci-kvm-main.py"
+      --add-flags "$sitePackages/oci_utils/impl/virt/oci-kvm-main.py" \
+      --set PYTHONPATH "$pythonPath"
 
     # oci-notify: pure bash script (no Python main); replace upstream wrapper
     # (which hardcodes /etc paths) with a patchShebangs-fixed copy from source.
@@ -71,12 +82,12 @@ python3.pkgs.buildPythonApplication rec {
 
     # Install libexec helpers; wrap the Python-based ones properly so they
     # resolve oci_utils at the Nix store path instead of using runtime discovery.
-    sitePackages2=$out/${python3.sitePackages}
     mkdir -p $out/libexec/oci-utils
 
     # ocid daemon (Python)
     makeWrapper ${python3.interpreter} $out/libexec/oci-utils/ocid \
-      --add-flags "$sitePackages2/oci_utils/impl/ocid-main.py"
+      --add-flags "$sitePackages/oci_utils/impl/ocid-main.py" \
+      --set PYTHONPATH "$pythonPath"
 
     # oci-growfs and oci-image-cleanup are bash scripts; install and patch shebangs
     install -Dm755 libexec/oci-growfs $out/libexec/oci-utils/oci-growfs
