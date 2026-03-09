@@ -8,7 +8,7 @@
 python3.pkgs.buildPythonApplication rec {
   pname = "oci-image-migrate";
   version = "0.11.6";
-  pyproject = false;
+  format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "oracle";

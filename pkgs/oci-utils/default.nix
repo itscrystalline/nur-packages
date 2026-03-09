@@ -7,7 +7,7 @@
 python3.pkgs.buildPythonApplication rec {
   pname = "oci-utils";
   version = "0.11.6";
-  pyproject = false;
+  format = "setuptools";
 
   src = fetchFromGitHub {
     owner = "oracle";
@@ -58,6 +58,16 @@ python3.pkgs.buildPythonApplication rec {
           --add-flags "$mainpy"
       fi
     done
+
+    # oci-kvm: its main module lives under impl/virt/, not impl/
+    rm -f $out/bin/oci-kvm
+    makeWrapper ${python3.interpreter} $out/bin/oci-kvm \
+      --add-flags "$sitePackages/oci_utils/impl/virt/oci-kvm-main.py"
+
+    # oci-notify: pure bash script (no Python main); replace upstream wrapper
+    # (which hardcodes /etc paths) with a patchShebangs-fixed copy from source.
+    install -Dm755 bin/oci-notify $out/bin/oci-notify
+    patchShebangs $out/bin/oci-notify
 
     # Install libexec helpers; wrap the Python-based ones properly so they
     # resolve oci_utils at the Nix store path instead of using runtime discovery.

@@ -36,7 +36,7 @@ in {
       wantedBy = ["multi-user.target"];
 
       serviceConfig = {
-        ExecStart = "${agentDir}/agent -config ${agentYml}";
+        ExecStart = "${agentDir}/agent -agent-config ${agentYml}";
         Restart = "on-failure";
         RestartSec = "10s";
 
