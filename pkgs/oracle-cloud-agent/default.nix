@@ -36,10 +36,10 @@ stdenv.mkDerivation rec {
 
     unsquashfs -d snap-src "$src"
 
-    install -Dm755 snap-src/agent                                        "$out/lib/oracle-cloud-agent/agent"
-    install -Dm755 snap-src/updater/updater                              "$out/lib/oracle-cloud-agent/updater/updater"
-    install -Dm644 snap-src/agent.yml                                    "$out/lib/oracle-cloud-agent/agent.yml"
-    install -Dm644 snap-src/updater.yml                                  "$out/lib/oracle-cloud-agent/updater.yml"
+    install -Dm755 snap-src/agent "$out/lib/oracle-cloud-agent/agent"
+    install -Dm755 snap-src/updater/updater "$out/lib/oracle-cloud-agent/updater/updater"
+    install -Dm644 snap-src/agent.yml "$out/lib/oracle-cloud-agent/agent.yml"
+    install -Dm644 snap-src/updater.yml "$out/lib/oracle-cloud-agent/updater.yml"
 
     # plugins
     for plugin_dir in snap-src/plugins/*/; do
@@ -60,7 +60,7 @@ stdenv.mkDerivation rec {
 
     # symlink main binaries into $out/bin
     mkdir -p "$out/bin"
-    ln -s "$out/lib/oracle-cloud-agent/agent"           "$out/bin/oracle-cloud-agent"
+    ln -s "$out/lib/oracle-cloud-agent/agent" "$out/bin/oracle-cloud-agent"
     ln -s "$out/lib/oracle-cloud-agent/updater/updater" "$out/bin/oracle-cloud-agent-updater"
 
     runHook postInstall
