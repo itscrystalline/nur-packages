@@ -13,11 +13,9 @@
 
   app2nix = pkgs.callPackage ./pkgs/app2unit {};
   occasion = pkgs.callPackage ./pkgs/occasion {};
-  veridian = pkgs.callPackage ./pkgs/veridian {};
   sipa-th-fonts = pkgs.callPackage ./pkgs/sipa-th-fonts {};
   hass-localtuya = pkgs.callPackage ./pkgs/hass-localtuya {};
   ha_tuya_ble = pkgs.callPackage ./pkgs/ha_tuya_ble {};
-  jitterbugpair = pkgs.callPackage ./pkgs/jitterbugpair {};
   irony-mod-manager = pkgs.callPackage ./pkgs/irony-mod-manager {};
   oracle-cloud-agent = pkgs.callPackage ./pkgs/oracle-cloud-agent {};
   oci-utils = pkgs.callPackage ./pkgs/oci-utils {};

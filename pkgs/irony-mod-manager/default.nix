@@ -26,11 +26,11 @@
 in
   stdenv.mkDerivation rec {
     pname = "irony-mod-manager";
-    version = "1.26.254";
+    version = "1.27.158";
 
     src = fetchzip {
       url = "https://github.com/bcssov/IronyModManager/releases/download/v${version}/linux-x64.zip";
-      sha256 = "sha256-Q0B8J2R7MtOSus5OvM0WXd8EQ8eAO7SN+cwF7Ylki6A=";
+      sha256 = "sha256-9PVmt3DTbxMuPOl7UEldKPZB+W9NqjlQRXusHn3obgk=";
       stripRoot = false;
     };
 

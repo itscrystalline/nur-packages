@@ -6,18 +6,16 @@
 buildHomeAssistantComponent rec {
   owner = "xZetsubou";
   domain = "localtuya";
-  version = "2025.5.1";
+  version = "2025.11.0";
 
   src = fetchFromGitHub {
     inherit owner;
-    repo = "hass-localtuya";
+    repo = domain;
     rev = version;
-    hash = "sha256-cYaMHh16dmjO8UrpBZScGoHDNqvmQ5ceAq/lP6qazxA=";
+    hash = "sha256-TISiZchkLZ3AaNh622nolIyBjDgdJBQrc30oBHN/INE=";
   };
 
-  passthru = {
-    isHomeAssistantComponent = true;
-  };
+  passthru.isHomeAssistantComponent = true;
 
   meta = with lib; {
     changelog = "https://github.com/xZetsubou/hass-localtuya/releases/tag/${version}";
