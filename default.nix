@@ -18,7 +18,6 @@
   hass-localtuya = pkgs.callPackage ./pkgs/hass-localtuya {};
   ha_tuya_ble = pkgs.callPackage ./pkgs/ha_tuya_ble {};
   jitterbugpair = pkgs.callPackage ./pkgs/jitterbugpair {};
-  vicinae = pkgs.callPackage ./pkgs/vicinae {};
   irony-mod-manager = pkgs.callPackage ./pkgs/irony-mod-manager {};
   oracle-cloud-agent = pkgs.callPackage ./pkgs/oracle-cloud-agent {};
   oci-utils = pkgs.callPackage ./pkgs/oci-utils {};
