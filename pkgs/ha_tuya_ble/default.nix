@@ -31,5 +31,6 @@ in
       homepage = "https://github.com/jbsky/ha_tuya_ble";
       maintainers = [];
       license = licenses.mit;
+      sourceProvenance = [sourceTypes.fromSource];
     };
   }

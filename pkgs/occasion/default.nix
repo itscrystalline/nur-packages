@@ -20,6 +20,8 @@ rustPlatform.buildRustPackage rec {
     description = "A small program to print something / run a command on a specific time/timeframe. ";
     homepage = "https://github.com/itscrystalline/occasion";
     license = lib.licenses.unlicense;
+    sourceProvenance = [lib.sourceTypes.fromSource];
+    mainProgram = "occasion";
     maintainers = [];
   };
 }

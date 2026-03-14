@@ -77,5 +77,7 @@ in
       homepage = "https://github.com/bcssov/IronyModManager";
       maintainers = [];
       license = licenses.mit;
+      sourceProvenance = [sourceTypes.binaryNativeCode];
+      mainProgram = "IronyModManager";
     };
   }

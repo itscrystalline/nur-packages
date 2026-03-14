@@ -109,6 +109,8 @@ python3.pkgs.buildPythonApplication rec {
     description = "Oracle Cloud Infrastructure instance utilities (ocid, oci-metadata, oci-network-config, oci-public-ip, and more)";
     homepage = "https://github.com/oracle/oci-utils";
     license = licenses.upl;
+    sourceProvenance = [sourceTypes.fromSource];
+    mainProgram = "oci-metadata";
     maintainers = [];
     platforms = platforms.linux;
   };

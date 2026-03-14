@@ -23,5 +23,6 @@ buildHomeAssistantComponent rec {
     homepage = "https://github.com/xZetsubou/hass-localtuya";
     maintainers = [];
     license = licenses.gpl3Only;
+    sourceProvenance = [sourceTypes.fromSource];
   };
 }

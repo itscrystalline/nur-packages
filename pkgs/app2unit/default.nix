@@ -1,4 +1,5 @@
 {
+  lib,
   stdenvNoCC,
   fetchFromGitHub,
 }:
@@ -21,4 +22,13 @@ stdenvNoCC.mkDerivation {
     cp $src/app2unit-open $out/bin
     cp $src/app2unit-term $out/bin
   '';
+
+  meta = with lib; {
+    description = "Convert app files to systemd units";
+    homepage = "https://github.com/Vladimir-csp/app2unit";
+    license = licenses.gpl3Only;
+    sourceProvenance = [sourceTypes.fromSource];
+    mainProgram = "app2unit";
+    maintainers = [];
+  };
 }

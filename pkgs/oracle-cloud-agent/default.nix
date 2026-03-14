@@ -14,13 +14,17 @@ stdenv.mkDerivation rec {
         x86_64-linux = "https://api.snapcraft.io/api/v1/snaps/download/ltx4XjES2e2ujitNIuO5GxPYDM6lp6ry_113.snap";
         aarch64-linux = "https://api.snapcraft.io/api/v1/snaps/download/ltx4XjES2e2ujitNIuO5GxPYDM6lp6ry_114.snap";
       }
-      .${stdenv.hostPlatform.system};
+      .${
+        stdenv.hostPlatform.system
+      };
     hash =
       {
         x86_64-linux = "sha256-UO/mq0EJJGOLtigL1ofAY8VM6hqxY42JKSFc4O1sH9M=";
         aarch64-linux = "sha256-xRU0p+YFgrA2nIobqr38pKG3ugZ9c1WihGqcoA6t8Bc=";
       }
-      .${stdenv.hostPlatform.system};
+      .${
+        stdenv.hostPlatform.system
+      };
   };
 
   nativeBuildInputs = [squashfsTools];

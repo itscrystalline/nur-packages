@@ -66,6 +66,7 @@ python3.pkgs.buildPythonApplication rec {
     description = "Oracle Cloud Infrastructure utilities to migrate on-premises images to OCI";
     homepage = "https://github.com/oracle/oci-utils";
     license = licenses.upl;
+    sourceProvenance = [sourceTypes.fromSource];
     maintainers = [];
     platforms = platforms.linux;
     mainProgram = "oci-image-migrate";
