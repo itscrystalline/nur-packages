@@ -1,9 +1,8 @@
 {
   stdenvNoCC,
   fetchFromGitHub,
-  lib,
 }:
-stdenvNoCC.mkDerivation rec {
+stdenvNoCC.mkDerivation {
   pname = "app2unit";
   version = "1.0.0";
 
