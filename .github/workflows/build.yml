@@ -107,7 +107,7 @@ jobs:
         fi
     - name: Commit and push flake updates (scheduled only)
       if: github.event_name == 'schedule' && steps.flake-check.outputs.changed == 'true'
-      uses: EndBug/add-and-commit@v9
+      uses: EndBug/add-and-commit@v10
       continue-on-error: true
       with:
         author_name: github-actions
