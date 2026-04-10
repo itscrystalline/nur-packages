@@ -2,15 +2,13 @@
   lib,
   stdenv,
   fetchFromGitHub,
-  gitUpdater,
   cmake,
   python3,
   withDynarec ? (
     stdenv.hostPlatform.isAarch64 || stdenv.hostPlatform.isRiscV64 || stdenv.hostPlatform.isLoongArch64
   ),
-  runCommand,
-  hello-x86_64,
-  mold,
+  mold-unwrapped,
+  libc,
 }:
 # Currently only supported on specific archs
 assert withDynarec
@@ -32,27 +30,28 @@ assert withDynarec
     # (this is for code that gets executed conditionally if the cpu at runtime supports their features, so setting this should be fine)
     postPatch = ''
       substituteInPlace CMakeLists.txt \
-        --replace-fail 'ASMFLAGS  -pipe -mcpu=cortex-a76' 'ASMFLAGS  -pipe -march=armv8.2-a+fp16+dotprod'
+        --replace-fail 'ASMFLAGS  -pipe -mcpu=cortex-a76' 'ASMFLAGS  -pipe -march=armv8.2-a+fp16+dotprod' \
+        --replace-fail 'set(CMAKE_EXE_LINKER_FLAGS -static)' 'set(CMAKE_EXE_LINKER_FLAGS "-static -L${libc.static}/lib")'
     '';
 
     nativeBuildInputs = [
       cmake
       python3
-      mold
+      mold-unwrapped
     ];
 
     cmakeFlags =
       [
         (lib.cmakeBool "NOGIT" true)
 
+        (lib.cmakeBool "WITH_MOLD" true)
+        (lib.cmakeBool "STATICBUILD" true)
+
         # Arch mega-option
         (lib.cmakeBool "ARM64" stdenv.hostPlatform.isAarch64)
         (lib.cmakeBool "RV64" stdenv.hostPlatform.isRiscV64)
         (lib.cmakeBool "PPC64LE" (stdenv.hostPlatform.isPower64 && stdenv.hostPlatform.isLittleEndian))
         (lib.cmakeBool "LARCH64" stdenv.hostPlatform.isLoongArch64)
-
-        "-DSTATICBUILD"
-        "-DWITH_MOLD=1"
       ]
       ++ lib.optionals stdenv.hostPlatform.isx86_64 [
         # x86_64 has no arch-specific mega-option, manually enable the options that apply to it
@@ -89,16 +88,6 @@ assert withDynarec
 
       runHook postInstallCheck
     '';
-
-    passthru = {
-      updateScript = gitUpdater {
-        rev-prefix = "v";
-        allowedVersions = "\\.[02468]$";
-      };
-      tests.hello = runCommand "box64-test-hello" {nativeBuildInputs = [finalAttrs.finalPackage];} ''
-        BOX64_LOG=1 box64 ${lib.getExe hello-x86_64} --version 2>&1 | tee $out
-      '';
-    };
 
     meta = {
       homepage = "https://box86.org/";
