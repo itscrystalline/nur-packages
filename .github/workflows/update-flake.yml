@@ -70,7 +70,7 @@ jobs:
         rm pr_body.md
 
     - name: Commit to new branch
-      uses: EndBug/add-and-commit@v10 
+      uses: EndBug/add-and-commit@v11 
       id: commit
       with:
         author_name: puddle
